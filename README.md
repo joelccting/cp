@@ -1,7 +1,3 @@
-# cp
-competitive programming 2025
+# Competitive Programming
 
-0912期初競程
-0919第一次活動
-0926第二次活動
-1003第三次活動
+Tracking sheet: https://docs.google.com/spreadsheets/d/14dYs0n1R_XGya0BLEtJumupeqFm1E819PMbX32c7-7Q/edit?gid=0#gid=0
