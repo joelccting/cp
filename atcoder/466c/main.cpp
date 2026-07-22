@@ -1,45 +1,85 @@
+#if 0 // by Gemini
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// Helper function to handle interactive queries
+bool ask(int L, int R)
+{
+    cout << "? " << L << " " << R << endl; // endl automatically flushes the buffer
+    string response;
+    cin >> response;
+    return response == "Yes";
+}
+
+int main()
+{
+    // Optimize standard I/O streams (can still use endl for flushing)
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    if (!(cin >> n))
+        return 0;
+
+    long long ans = 0;
+    int R = 1;
+
+    for (int L = 1; L <= n; ++L)
+    {
+        // The right pointer cannot be behind the left pointer
+        R = max(R, L);
+
+        // Expand the right pointer as long as the pair is close
+        while (R + 1 <= n && ask(L, R + 1))
+        {
+            R++;
+        }
+
+        // Count the number of valid pairs with 'l' as the left element
+        ans += (R - L);
+    }
+
+    // Output the final answer
+    cout << "! " << ans << endl;
+
+    return 0;
+}
+
+#else
+
 #include <bits/stdc++.h>
 using namespace std;
-typedef struct
+
+bool ask(int L, int R)
 {
-    int i;
-    int j;
-} Pair;
+    char s[10];
+    printf("? %d %d\n", L, R);
+    fflush(stdout);
+    scanf("%s", s);
+    return (0 == strcmp(s, "Yes"));
+}
 
 int main()
 {
     int N;
+    long long ans = 0;
     cin >> N;
-    int sz = N * (N - 1) / 2;
-    Pair p[sz];
-    int idx = 0;
-    for (int i = 1; i <= N; ++i)
+    int R = 1;
+    for (int L = 1; L < N; ++L)
     {
-        for (int j = 1; j <= N; ++j)
+        R = ((R > L) ? R : L); // max(R, L)
+        while ((R + 1 <= N) && ask(L, R + 1))
         {
-            if (i < j)
-            {
-                p[idx].i = i;
-                p[idx].j = j;
-                ++idx;
-            }
+            R++;
         }
+        ans += (R - L);
     }
-
-    int n = 2 * N, cnt = 0;
-    idx = 0;
-    char ans[10];
-    while (n--)
-    {
-        printf("? %d %d\n", p[idx].i, p[idx].j);
-        ++idx;
-        fflush(stdout);
-        scanf("%s", ans);
-        if (0 == strcmp(ans, "Yes"))
-            cnt++;
-        if (idx >= sz)
-            break;
-    }
-    printf("! %d", cnt);
+    printf("! %lld\n", ans);
+    fflush(stdout);
     return 0;
 }
+
+#endif
