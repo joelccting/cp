@@ -6,7 +6,8 @@ LL fish(vector<int> &v, LL time, int target)
 {
     int sz = v.size();
     LL cnt = 0;
-    for (int i = 0; i < sz; ++i)
+    // for (int i = 0; i < sz; ++i)
+    for (auto i : v) //C++11
     {
         cnt += time / v[i];
         if (cnt >= target)
