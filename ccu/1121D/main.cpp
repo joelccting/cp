@@ -57,7 +57,6 @@ int main()
 
     kth = k / 2 + 1;
 
-    int count = n;
     for (int i = 0; i < n; ++i)
     {
         cin >> x[i];
