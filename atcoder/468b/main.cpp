@@ -1,5 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+#if 1 // 26/07/26
+
+int main()
+{
+    int M, D;
+    cin >> M >> D;
+    string S;
+    cin >> S;
+    vector<bool> v(M);
+    for (int i = 0; i < M; ++i)
+    {
+        if (S[i] == 'G')
+        {
+            int from = (i - D) < 0 ? 0 : (i - D);
+            int to = (i + D) > (M - 1) ? (M - 1) : (i + D);
+            for (int j = from; j <= to; ++j)
+            {
+                if (v[j] != true)
+                {
+                    v[j] = true;
+                }
+            }
+        }
+    }
+
+    int ans = 0;
+    for (int i = 0; i < M; ++i)
+    {
+        if (v[i] == false)
+        {
+            ++ans;
+        }
+    }
+    cout << ans;
+    return 0;
+}
+#endif // 26/07/26
+
+#if 0  // 26/07/25
 int main()
 {
     int M, D;
@@ -50,3 +90,4 @@ int main()
     cout << ans;
     return 0;
 }
+#endif // 26/07/25
