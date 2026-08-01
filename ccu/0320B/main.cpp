@@ -1,5 +1,9 @@
 // The problem asks for the minimum number of additional edges needed
 // so that every vertex can reach every other vertex.
+
+//#define DSU
+#ifdef DSU
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef vector<vector<int>> VVI;
@@ -57,3 +61,5 @@ int main()
     cout << numOfComponents - 1;
     return 0;
 }
+
+#endif // DSU
