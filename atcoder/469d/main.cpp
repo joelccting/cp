@@ -5,8 +5,8 @@ int main()
     int N, M;
     if (!(cin >> N >> M))
         return 0;
-    
-    while (M--)
+
+    for (int i = 1; i <= M; ++i)
     {
         int A, B;
         cin >> A >> B;
