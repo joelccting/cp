@@ -2,17 +2,20 @@
 using namespace std;
 typedef long long LL;
 #define SZ (2010)
-LL dp[SZ][SZ]; // dp[i][i]=0; len=1
+// LL dp[SZ][SZ]; // dp[i][i]=0; len=1
+LL dp[2][SZ];
+
 void f(vector<int> &s, int n)
 {
     for (int len = 2; len <= n; ++len)
     {
-        for (int l = 1; l <= n; ++l)
+        // for (int l = 1; l <= n; ++l)
+        for (int l = 1; l <= n - len + 1; ++l)
         {
             int r = l + len - 1;
-            if (r > n || r < 1)
-                continue;
-            dp[l][r] = min(dp[l + 1][r], dp[l][r - 1]) + (s[r] - s[l]);
+            // if (r > n || r < 1)
+            //     continue;
+            dp[len % 2][l] = min(dp[1 - (len % 2)][l + 1], dp[1 - (len % 2)][l]) + (s[r] - s[l]);
         }
     }
 }
@@ -32,6 +35,6 @@ int main()
     }
     sort(s.begin(), s.end());
     f(s, n);
-    cout << dp[1][n];
+    cout << dp[n % 2][1];
     return 0;
 }
