@@ -2,7 +2,8 @@
 using namespace std;
 #define MODULO (1000000007)
 typedef long long LL;
-LL dp[100005][105]; // 狀態dp[i][j] 為 第 i 分鐘、心率為 j 的方案總數
+// LL dp[100005][105]; // 狀態dp[i][j] 為 第 i 分鐘、心率為 j 的方案總數
+LL dp[2][105];
 
 void f(vector<int> &x, int n, int m)
 {
@@ -23,6 +24,8 @@ void f(vector<int> &x, int n, int m)
 
     for (int i = 2; i <= n; ++i)
     {
+        // 清空舊資料
+        memset(dp[i % 2], 0, 105 * sizeof(LL));
         for (int j = 1; j <= m; ++j)
         {
 
@@ -32,22 +35,22 @@ void f(vector<int> &x, int n, int m)
 
                 if (j > 1)
                 {
-                    sum += dp[i - 1][j - 1];
+                    sum += dp[(i - 1) % 2][j - 1];
                     sum %= MODULO;
                 }
 
                 if (j < m)
                 {
-                    sum += dp[i - 1][j + 1];
+                    sum += dp[(i - 1) % 2][j + 1];
                     sum %= MODULO;
                 }
 
-                sum += dp[i - 1][j];
-                dp[i][j] = sum % MODULO;
+                sum += dp[(i - 1) % 2][j];
+                dp[i % 2][j] = sum % MODULO;
             }
             else
             {
-                dp[i][j] = 0;
+                dp[i % 2][j] = 0;
             }
         }
     }
@@ -55,6 +58,9 @@ void f(vector<int> &x, int n, int m)
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     int n, m;
     if (!(cin >> n >> m))
         return 0;
@@ -69,7 +75,7 @@ int main()
     LL ans = 0;
     for (int i = 1; i <= m; ++i)
     {
-        ans += dp[n][i];
+        ans += dp[n % 2][i];
         ans %= MODULO;
     }
     cout << ans;
