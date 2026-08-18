@@ -24,7 +24,8 @@ void f(vector<LL> &dp, vector<vector<EP>> &adj, vector<int> &in_degree, int n, i
         // for (auto p : adj[u])
         for (const auto &p : adj[u])
         {
-            dp[p.v] = max({dp[p.v], dp[u] + p.w});
+            dp[p.v] = // max({dp[p.v], dp[u] + p.w});
+                max(dp[p.v], dp[u] + p.w);
             in_degree[p.v]--;
             if (in_degree[p.v] == 0)
                 q.push(p.v);
