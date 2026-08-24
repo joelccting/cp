@@ -3,32 +3,27 @@ typedef long long LL;
 using namespace std;
 typedef long long LL;
 
-int fastExponentiation(int base, int exp)
+LL fastExponentiation(LL base, LL exp, LL mod)
 {
-    int y = 1;
-    int t = exp - 2;
-    LL tmp;
-    while (t)
+    LL y = 1LL;
+    while (mod)
     {
-        if (t & 1)
+        if (mod & 1)
         {
-            tmp = 1LL * y;
-            tmp *= base;
-            tmp %= exp;
-            y = (int)tmp;
+            y *= base;
+            y %= exp;
         }
 
-        tmp = 1LL * base;
-        tmp *= base;
-        tmp %= exp;
-        base = (int)tmp;
-        t >>= 1;
+        base *= base;
+        base %= exp;
+        mod >>= 1;
     }
 
     return y;
 }
 
-int r[10], m[10], Mi[10], y[10];
+LL r[10], m[10], Mi[10], y[10];
+
 int main()
 {
     int n;
@@ -45,7 +40,7 @@ int main()
     for (int i = 1; i <= n; ++i)
     {
         Mi[i] = M / m[i];
-        y[i] = fastExponentiation(Mi[i], m[i]);
+        y[i] = fastExponentiation(Mi[i], m[i], m[i] - 2);
     }
 
     LL x = 0;
