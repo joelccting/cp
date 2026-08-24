@@ -4,10 +4,10 @@ const int M = (1E9 + 7);
 typedef long long LL;
 LL power(LL base, LL exp, int mod)
 {
-    if (base == 0 && exp == 0)
-    {
-        return 1;
-    }
+    // if (base == 0 && exp == 0)
+    // {
+    //     return 1;
+    // }
 
     LL ans = 1;
     while (exp)
